@@ -64,7 +64,7 @@
     "shortDesc": "Maximum distance allowed for Go To Location.",
     "type":             "double",
     "units":            "m",
-    "default":     1000,
+    "default":     5000,
     "min":              1
 },
 {
