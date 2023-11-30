@@ -37,10 +37,10 @@
         <file alias="pencil.svg">resources/pencil.svg</file>
         <file alias="Play">resources/Play.svg</file>
         <file alias="PowerButton">resources/PowerButton.svg</file>
-        <file alias="QGCLogoBlack">resources/QGCLogoBlack.svg</file>
+        <file alias="QGCLogoBlack">resources/cims_logo.png</file>
 		<file alias="QGCLogoFull">resources/cims_logo.png</file>
-        <file alias="QGCLogoWhite">resources/QGCLogoWhite.svg</file>
-        <file alias="QGCLogoArrow">resources/QGCLogoArrow.svg</file>
+        <file alias="QGCLogoWhite">resources/cims_logo.png</file>
+        <file alias="QGCLogoArrow">resources/cims_logo.png</file>
         <file alias="QGroundControlConnect">resources/QGroundControlConnect.svg</file>
         <file alias="rtl.svg">resources/rtl.svg</file>
         <file alias="SplashScreen">resources/SplashScreen.png</file>
@@ -58,6 +58,8 @@
         <file alias="Gripper.svg">resources/Gripper.svg</file>
         <file alias="GripperRelease.svg">resources/GripperRelease.svg</file>
         <file alias="GripperGrab.svg">resources/GripperGrab.svg</file>
+        <file alias="OceanSled.png">resources/OceanSled.png</file>
+        <file alias="Folder.svg">resources/Folder.svg</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">
