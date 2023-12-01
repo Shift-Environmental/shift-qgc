@@ -29,7 +29,7 @@ Item {
             height:         detailsLabel.height + ScreenTools.defaultFontPixelHeight
             QGCLabel {
                 id:             detailsLabel
-                text:           qsTr("Flight Details")
+                text:           qsTr("Mission Details")
                 font.pointSize: ScreenTools.mediumFontPointSize
                 font.family:    ScreenTools.demiboldFontFamily
                 anchors.centerIn: parent
@@ -48,7 +48,7 @@ Item {
                 anchors.right:      parent.right
                 anchors.left:       parent.left
                 QGCLabel {
-                    text:           qsTr("Flight Date & Time")
+                    text:           qsTr("Mission Date & Time")
                 }
                 Rectangle {
                     id:             dateRect
@@ -93,7 +93,7 @@ Item {
                             }
                         }
                         QGCLabel {
-                            text:   qsTr("Flight Start Time")
+                            text:   qsTr("Mission Start Time")
                         }
                         Item {
                             anchors.right:  parent.right
@@ -183,7 +183,7 @@ Item {
                 }
                 Item { width: 1; height: ScreenTools.defaultFontPixelHeight * 0.25; }
                 QGCLabel {
-                    text:           qsTr("Flight Context")
+                    text:           qsTr("Mission Context")
                     visible:        QGroundControl.airspaceManager.flightPlan.briefFeatures.count > 0
                 }
                 Repeater {

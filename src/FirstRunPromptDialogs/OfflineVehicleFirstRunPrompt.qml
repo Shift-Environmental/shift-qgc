@@ -33,7 +33,7 @@ FirstRunPrompt {
         QGCLabel {
             id:                     unitsSectionLabel
             Layout.preferredWidth:  valueRect.width
-            text:                   qsTr("Specify information about the vehicle you plan to fly. If you are unsure of the correct values leave them as is.")
+            text:                   qsTr("Specify information about the vehicle you plan to pilot. If you are unsure of the correct values leave them as is.")
             wrapMode:               Text.WordWrap
         }
 

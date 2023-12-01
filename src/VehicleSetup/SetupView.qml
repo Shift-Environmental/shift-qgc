@@ -130,7 +130,7 @@ Rectangle {
                 wrapMode:               Text.WordWrap
                 font.pointSize:         ScreenTools.mediumFontPointSize
                 text:                   qsTr("%1 does not currently support setup of your vehicle type. ").arg(QGroundControl.appName) +
-                                        "If your vehicle is already configured you can still Fly."
+                                        "If your vehicle is already configured you can still navigate."
                 onLinkActivated: Qt.openUrlExternally(link)
             }
         }

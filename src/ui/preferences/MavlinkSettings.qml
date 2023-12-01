@@ -578,7 +578,7 @@ Rectangle {
                         QGCLabel {
                             width:              _labelWidth
                             anchors.baseline:   ratingCombo.baseline
-                            text:               qsTr("Flight Rating:")
+                            text:               qsTr("Pilot Rating:")
                         }
                         QGCComboBox {
                             id:         ratingCombo

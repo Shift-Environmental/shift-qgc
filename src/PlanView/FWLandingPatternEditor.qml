@@ -245,7 +245,7 @@ Rectangle {
                 wrapMode:               Text.WordWrap
                 color:                  qgcPal.warningText
                 font.pointSize:         ScreenTools.smallFontPointSize
-                text:                   qsTr("* Actual flight path will vary.")
+                text:                   qsTr("* Actual path will vary.")
             }
 
             QGCLabel {

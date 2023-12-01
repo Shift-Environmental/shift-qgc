@@ -87,7 +87,7 @@ Rectangle {
 
                 QGCLabel {
                     Layout.fillWidth:   true
-                    text:           qsTr("Note: Polygon respresents structure surface not vehicle flight path.")
+                    text:           qsTr("Note: Polygon respresents structure surface not vehicle path.")
                     wrapMode:       Text.WordWrap
                     font.pointSize: ScreenTools.smallFontPointSize
                 }

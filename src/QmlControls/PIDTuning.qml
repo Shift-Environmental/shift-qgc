@@ -370,7 +370,7 @@ RowLayout {
         QGCCheckBox {
             visible: showAutoModeChange
             id:     autoModeChange
-            text:   qsTr("Automatic Flight Mode Switching")
+            text:   qsTr("Automatic Control Mode Switching")
             onClicked: {
                 if (checked)
                     dataTimer.running = false

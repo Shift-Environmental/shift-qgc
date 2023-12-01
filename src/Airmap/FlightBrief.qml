@@ -29,7 +29,7 @@ Item {
             height:         briefLabel.height + ScreenTools.defaultFontPixelHeight
             QGCLabel {
                 id:             briefLabel
-                text:           qsTr("Flight Brief")
+                text:           qsTr("Navigation Brief")
                 font.pointSize: ScreenTools.mediumFontPointSize
                 font.family:    ScreenTools.demiboldFontFamily
                 anchors.centerIn: parent
