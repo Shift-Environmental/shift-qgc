@@ -19,14 +19,14 @@ ToolStripActionList {
 
     model: [
         ToolStripAction {
-            text:           qsTr("Plan")
-            iconSource:     "/qmlimages/Plan.svg"
+            text:           qsTr("Mission")
+            iconSource:     "/res/wind-rose.svg"
             onTriggered:    mainWindow.showPlanView()
         },
         PreFlightCheckListShowAction { onTriggered: displayPreFlightChecklist() },
-        GuidedActionTakeoff { },
-        GuidedActionLand { },
-        GuidedActionRTL { },
+        // GuidedActionTakeoff { },
+        // GuidedActionLand { },
+        // GuidedActionRTL { },
         GuidedActionPause { },
         GuidedActionActionList { },
         GuidedActionGripper { }
