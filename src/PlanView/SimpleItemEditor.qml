@@ -240,7 +240,7 @@ Rectangle {
 
                 QGCCheckBox {
                     id:         flightSpeedCheckbox
-                    text:       qsTr("Flight Speed")
+                    text:       qsTr("Vehicle Speed")
                     checked:    missionItem.speedSection.specifyFlightSpeed
                     onClicked:  missionItem.speedSection.specifyFlightSpeed = checked
                     visible:    missionItem.speedSection.available
