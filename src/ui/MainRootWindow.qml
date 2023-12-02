@@ -148,7 +148,7 @@ ApplicationWindow {
     }
 
     function showTool(toolTitle, toolSource, toolIcon) {
-        toolDrawer.backIcon     = flightView.visible ? "/qmlimages/PaperPlane.svg" : "/qmlimages/Plan.svg"
+        toolDrawer.backIcon     = flightView.visible ? "/res/OceanSled.png" : "/res/wind-rose.svg"
         toolDrawer.toolTitle    = toolTitle
         toolDrawer.toolSource   = toolSource
         toolDrawer.toolIcon     = toolIcon
@@ -164,7 +164,7 @@ ApplicationWindow {
     }
 
     function showSettingsTool() {
-        showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
+        showTool(qsTr("Application Settings"), "AppSettings.qml", "/qmlimages/Gears.svg")
     }
 
     //-------------------------------------------------------------------------
@@ -282,7 +282,7 @@ ApplicationWindow {
 
         QGCPopupDialog {
             id:         toolSelectDialog
-            title:      qsTr("Select Tool")
+            title:      qsTr("Settings")
             buttons:    StandardButton.Close
 
             property real _toolButtonHeight:    ScreenTools.defaultFontPixelHeight * 3
@@ -303,7 +303,7 @@ ApplicationWindow {
                         Layout.fillWidth:   true
                         text:               qsTr("Vehicle Setup")
                         imageColor:         qgcPal.text
-                        imageResource:      "/qmlimages/Gears.svg"
+                        imageResource:      "/res/OceanSled.png"
                         onClicked: {
                             if (!mainWindow.preventViewSwitch()) {
                                 toolSelectDialog.close()
@@ -312,21 +312,21 @@ ApplicationWindow {
                         }
                     }
 
-                    SubMenuButton {
-                        id:                 analyzeButton
-                        height:             toolSelectDialog._toolButtonHeight
-                        Layout.fillWidth:   true
-                        text:               qsTr("Analyze Tools")
-                        imageResource:      "/qmlimages/Analyze.svg"
-                        imageColor:         qgcPal.text
-                        visible:            QGroundControl.corePlugin.showAdvancedUI
-                        onClicked: {
-                            if (!mainWindow.preventViewSwitch()) {
-                                toolSelectDialog.close()
-                                mainWindow.showAnalyzeTool()
-                            }
-                        }
-                    }
+                    // SubMenuButton {
+                    //     id:                 analyzeButton
+                    //     height:             toolSelectDialog._toolButtonHeight
+                    //     Layout.fillWidth:   true
+                    //     text:               qsTr("Analyze Tools")
+                    //     imageResource:      "/qmlimages/Analyze.svg"
+                    //     imageColor:         qgcPal.text
+                    //     visible:            QGroundControl.corePlugin.showAdvancedUI
+                    //     onClicked: {
+                    //         if (!mainWindow.preventViewSwitch()) {
+                    //             toolSelectDialog.close()
+                    //             mainWindow.showAnalyzeTool()
+                    //         }
+                    //     }
+                    // }
 
                     SubMenuButton {
                         id:                 settingsButton
@@ -344,57 +344,57 @@ ApplicationWindow {
                         }
                     }
 
-                    ColumnLayout {
-                        width:                  innerLayout.width
-                        spacing:                0
-                        Layout.alignment:       Qt.AlignHCenter
+                    // ColumnLayout {
+                    //     width:                  innerLayout.width
+                    //     spacing:                0
+                    //     Layout.alignment:       Qt.AlignHCenter
 
-                        QGCLabel {
-                            id:                     versionLabel
-                            text:                   qsTr("%1 Version").arg(QGroundControl.appName)
-                            font.pointSize:         ScreenTools.smallFontPointSize
-                            wrapMode:               QGCLabel.WordWrap
-                            Layout.maximumWidth:    parent.width
-                            Layout.alignment:       Qt.AlignHCenter
-                        }
+                    //     QGCLabel {
+                    //         id:                     versionLabel
+                    //         text:                   qsTr("%1 Version").arg(QGroundControl.appName)
+                    //         font.pointSize:         ScreenTools.smallFontPointSize
+                    //         wrapMode:               QGCLabel.WordWrap
+                    //         Layout.maximumWidth:    parent.width
+                    //         Layout.alignment:       Qt.AlignHCenter
+                    //     }
 
-                        QGCLabel {
-                            text:                   QGroundControl.qgcVersion
-                            font.pointSize:         ScreenTools.smallFontPointSize
-                            wrapMode:               QGCLabel.WrapAnywhere
-                            Layout.maximumWidth:    parent.width
-                            Layout.alignment:       Qt.AlignHCenter
+                    //     QGCLabel {
+                    //         text:                   QGroundControl.qgcVersion
+                    //         font.pointSize:         ScreenTools.smallFontPointSize
+                    //         wrapMode:               QGCLabel.WrapAnywhere
+                    //         Layout.maximumWidth:    parent.width
+                    //         Layout.alignment:       Qt.AlignHCenter
 
-                            QGCMouseArea {
-                                id:                 easterEggMouseArea
-                                anchors.topMargin:  -versionLabel.height
-                                anchors.fill:       parent
+                    //         QGCMouseArea {
+                    //             id:                 easterEggMouseArea
+                    //             anchors.topMargin:  -versionLabel.height
+                    //             anchors.fill:       parent
 
-                                onClicked: {
-                                    if (mouse.modifiers & Qt.ControlModifier) {
-                                        QGroundControl.corePlugin.showTouchAreas = !QGroundControl.corePlugin.showTouchAreas
-                                    } else if (mouse.modifiers & Qt.ShiftModifier) {
-                                        if(!QGroundControl.corePlugin.showAdvancedUI) {
-                                            advancedModeConfirmation.open()
-                                        } else {
-                                            QGroundControl.corePlugin.showAdvancedUI = false
-                                        }
-                                    }
-                                }
+                    //             onClicked: {
+                    //                 if (mouse.modifiers & Qt.ControlModifier) {
+                    //                     QGroundControl.corePlugin.showTouchAreas = !QGroundControl.corePlugin.showTouchAreas
+                    //                 } else if (mouse.modifiers & Qt.ShiftModifier) {
+                    //                     if(!QGroundControl.corePlugin.showAdvancedUI) {
+                    //                         advancedModeConfirmation.open()
+                    //                     } else {
+                    //                         QGroundControl.corePlugin.showAdvancedUI = false
+                    //                     }
+                    //                 }
+                    //             }
 
-                                MessageDialog {
-                                    id:                 advancedModeConfirmation
-                                    title:              qsTr("Advanced Mode")
-                                    text:               QGroundControl.corePlugin.showAdvancedUIMessage
-                                    standardButtons:    StandardButton.Yes | StandardButton.No
-                                    onYes: {
-                                        QGroundControl.corePlugin.showAdvancedUI = true
-                                        advancedModeConfirmation.close()
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    //             MessageDialog {
+                    //                 id:                 advancedModeConfirmation
+                    //                 title:              qsTr("Advanced Mode")
+                    //                 text:               QGroundControl.corePlugin.showAdvancedUIMessage
+                    //                 standardButtons:    StandardButton.Yes | StandardButton.No
+                    //                 onYes: {
+                    //                     QGroundControl.corePlugin.showAdvancedUI = true
+                    //                     advancedModeConfirmation.close()
+                    //                 }
+                    //             }
+                    //         }
+                    //     }
+                    // }
                 }
             }
         }
