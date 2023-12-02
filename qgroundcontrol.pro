@@ -64,11 +64,11 @@ WindowsBuild {
 # Branding
 #
 
-QGC_APP_NAME        = "QGroundControl"
-QGC_ORG_NAME        = "QGroundControl.org"
-QGC_ORG_DOMAIN      = "org.qgroundcontrol"
-QGC_APP_DESCRIPTION = "Open source ground control app provided by QGroundControl dev team"
-QGC_APP_COPYRIGHT   = "Copyright (C) 2019 QGroundControl Development Team. All rights reserved."
+QGC_APP_NAME        = "OceanSled"
+QGC_ORG_NAME        = "Shift Coastal Technologies"
+QGC_ORG_DOMAIN      = "com.shiftenvironmental"
+QGC_APP_DESCRIPTION = "OceanSled Navigation Software"
+QGC_APP_COPYRIGHT   = "Copyright (C) 2024 Shift Environmental Technologies. All rights reserved."
 
 WindowsBuild {
     QGC_INSTALLER_SCRIPT        = "$$SOURCE_DIR\\deploy\\windows\\nullsoft_installer.nsi"
@@ -362,8 +362,8 @@ CustomBuild {
     }
 } else {
     DEFINES += QGC_APPLICATION_NAME=\"\\\"OceanSled\\\"\"
-    DEFINES += QGC_ORG_NAME=\"\\\"QGroundControl.org\\\"\"
-    DEFINES += QGC_ORG_DOMAIN=\"\\\"org.qgroundcontrol\\\"\"
+    DEFINES += QGC_ORG_NAME=\"\\\"Shift Coastal Technologies\\\"\"
+    DEFINES += QGC_ORG_DOMAIN=\"\\\"com.shiftenvironmental\\\"\"
     RESOURCES += \
         $$PWD/qgroundcontrol.qrc \
         $$PWD/qgcresources.qrc \
