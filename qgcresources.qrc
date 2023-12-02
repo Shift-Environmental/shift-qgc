@@ -60,6 +60,7 @@
         <file alias="GripperGrab.svg">resources/GripperGrab.svg</file>
         <file alias="OceanSled.png">resources/OceanSled.png</file>
         <file alias="Folder.svg">resources/Folder.svg</file>
+        <file alias="OceanSled_Red.png">resources/OceanSled_Red.png</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">
