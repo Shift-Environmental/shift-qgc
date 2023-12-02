@@ -870,7 +870,7 @@ Item {
             anchors.left:           toolStrip.y + toolStrip.height + _toolsMargin > mapScale.y ? toolStrip.right: parent.left
             mapControl:             editorMap
             buttonsOnLeft:          true
-            terrainButtonVisible:   _editingLayer === _layerMission
+            terrainButtonVisible:   false
             terrainButtonChecked:   terrainStatus.visible
             onTerrainButtonClicked: terrainStatus.toggleVisible()
         }
@@ -1042,7 +1042,7 @@ Item {
             SectionHeader {
                 id:                 storageSection
                 Layout.fillWidth:   true
-                text:               qsTr("Storage")
+                text:               qsTr("Plan Files")
             }
 
             GridLayout {
@@ -1052,7 +1052,7 @@ Item {
                 visible:            storageSection.visible
 
                 QGCButton {
-                    text:               qsTr("Open...")
+                    text:               qsTr("Load")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress
                     onClicked: {
@@ -1092,7 +1092,7 @@ Item {
                 QGCButton {
                     Layout.columnSpan:  3
                     Layout.fillWidth:   true
-                    text:               qsTr("Save Waypoints as KML")
+                    text:               qsTr("Save as KML")
                     enabled:            !_planMasterController.syncInProgress && _visualItems.count > 1
                     onClicked: {
                         // First point does not count
@@ -1110,6 +1110,7 @@ Item {
                 id:                 vehicleSection
                 Layout.fillWidth:   true
                 text:               qsTr("Vehicle")
+                visible: false
             }
 
             RowLayout {
