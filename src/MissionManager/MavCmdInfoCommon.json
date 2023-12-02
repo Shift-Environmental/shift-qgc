@@ -28,7 +28,7 @@
             "id":                   16,
             "rawName":              "MAV_CMD_NAV_WAYPOINT",
             "friendlyName":         "Waypoint",
-            "description":          "Travel to a position in 3D space.",
+            "description":          "Travel to a position.",
             "specifiesCoordinate":  true,
             "friendlyEdit":         true,
             "category":             "Basic",
@@ -167,7 +167,7 @@
             "description":          "Land vehicle at the specified location.",
             "specifiesCoordinate":  true,
             "isLandCommand":        true,
-            "friendlyEdit":         true,
+            "friendlyEdit":         false,
             "category":             "Basic",
             "param1": {
                 "label":            "Abort Alt",
