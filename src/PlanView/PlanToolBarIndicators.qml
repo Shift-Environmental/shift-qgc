@@ -129,50 +129,50 @@ Item {
         columns:                4
 
         GridLayout {
-            columns:                8
+            columns:                6
             rowSpacing:             _rowSpacing
             columnSpacing:          _labelToValueSpacing
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
                 text:               qsTr("Selected Waypoint")
-                Layout.columnSpan:  8
+                Layout.columnSpan:  6
                 font.pointSize:     ScreenTools.smallFontPointSize
             }
 
-            QGCLabel { text: qsTr("Alt diff:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _altDifferenceText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _mediumValueWidth
-            }
+            // QGCLabel { text: qsTr("Alt diff:"); font.pointSize: _dataFontSize; }
+            // QGCLabel {
+            //     text:                   _altDifferenceText
+            //     font.pointSize:         _dataFontSize
+            //     Layout.minimumWidth:    _mediumValueWidth
+            // }
 
-            Item { width: 1; height: 1 }
+            // Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Azimuth:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _azimuthText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _smallValueWidth
-            }
+            // QGCLabel { text: qsTr("Azimuth:"); font.pointSize: _dataFontSize; }
+            // QGCLabel {
+            //     text:                   _azimuthText
+            //     font.pointSize:         _dataFontSize
+            //     Layout.minimumWidth:    _smallValueWidth
+            // }
 
-            Item { width: 1; height: 1 }
+            // Item { width: 1; height: 1 }
 
-            QGCLabel { text: qsTr("Dist prev WP:"); font.pointSize: _dataFontSize; }
+            QGCLabel { text: qsTr("WP Distance:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   _distanceText
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
 
-            QGCLabel { text: qsTr("Gradient:"); font.pointSize: _dataFontSize; }
-            QGCLabel {
-                text:                   _gradientText
-                font.pointSize:         _dataFontSize
-                Layout.minimumWidth:    _mediumValueWidth
-            }
-
             Item { width: 1; height: 1 }
+
+            // QGCLabel { text: qsTr("Gradient:"); font.pointSize: _dataFontSize; }
+            // QGCLabel {
+            //     text:                   _gradientText
+            //     font.pointSize:         _dataFontSize
+            //     Layout.minimumWidth:    _mediumValueWidth
+            // }
 
             QGCLabel { text: qsTr("Heading:"); font.pointSize: _dataFontSize; }
             QGCLabel {
@@ -180,37 +180,37 @@ Item {
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _smallValueWidth
             }
+
+            Item { width: 50; height: 1 }
         }
 
         GridLayout {
-            columns:                5
+            columns:                6
             rowSpacing:             _rowSpacing
             columnSpacing:          _labelToValueSpacing
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
                 text:               qsTr("Total Mission")
-                Layout.columnSpan:  5
+                Layout.columnSpan:  6
                 font.pointSize:     ScreenTools.smallFontPointSize
             }
 
-            QGCLabel { text: qsTr("Distance:"); font.pointSize: _dataFontSize; }
+            QGCLabel { text: qsTr("Total Distance:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   _missionDistanceText
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
 
-            Item { width: 1; height: 1 }
-
-            QGCLabel { text: qsTr("Max telem dist:"); font.pointSize: _dataFontSize; }
+            QGCLabel { text: qsTr("Max Radio Distance:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   _missionMaxTelemetryText
                 font.pointSize:         _dataFontSize
                 Layout.minimumWidth:    _largeValueWidth
             }
 
-            QGCLabel { text: qsTr("Time:"); font.pointSize: _dataFontSize; }
+            QGCLabel { text: qsTr("Duration:"); font.pointSize: _dataFontSize; }
             QGCLabel {
                 text:                   getMissionTime()
                 font.pointSize:         _dataFontSize
