@@ -231,7 +231,7 @@ QGCPopupDialog {
             wrapMode:   Text.WordWrap
             text:       qsTr("Warning: Modifying values while vehicle is in operation can lead to vehicle instability and possible vehicle loss. ") +
                         qsTr("Make sure you know what you are doing and double-check your values before Save!")
-            visible:    fact.componentId != -1
+            visible:    false
         }
 
         QGCCheckBox {
