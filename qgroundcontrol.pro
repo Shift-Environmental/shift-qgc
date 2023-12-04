@@ -16,7 +16,7 @@ DEFINES += DISABLE_VIDEOSTREAMING
 DEFINES -= DAILY_BUILD
 
 CONFIG += StableBuild
-CONFIG += installer
+# CONFIG += installer
 
 exists($${OUT_PWD}/qgroundcontrol.pro) {
     error("You must use shadow build (e.g. mkdir build; cd build; qmake ../qgroundcontrol.pro).")
