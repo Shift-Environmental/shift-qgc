@@ -32,7 +32,7 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = QGroundControl
+TARGET   = OceanSled
 TEMPLATE = app
 QGCROOT  = $$PWD
 
