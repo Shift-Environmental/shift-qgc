@@ -113,10 +113,63 @@ Rectangle {
         }
     }
 
-    //-------------------------------------------------------------------------
-    //-- Branding Logo
+    // Controller Status Indicator
+    Item {
+        id: controllerStatus
+        width: 50
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.rightMargin: ScreenTools.defaultFontPixelWidth * ScreenTools.largeFontPointRatio * 1.5
+        visible: _activeVehicle
+
+        property int activeControllerId: 1
+        property var activeVehicle: null
+
+        Connections {
+            target: QGroundControl.multiVehicleManager
+            onActiveVehicleChanged: {
+                // Disconnect from previous vehicle's signals if any
+                if (controllerStatus.activeVehicle) {
+                    controllerStatus.activeVehicle.namedValueFloatReceived.disconnect(controllerStatus.handleNamedValueFloat);
+                }
+
+                var vehicle = QGroundControl.multiVehicleManager.activeVehicle;
+                controllerStatus.activeVehicle = vehicle;
+
+                // Connect to the new active vehicle's signal
+                if (vehicle) {
+                    vehicle.namedValueFloatReceived.connect(controllerStatus.handleNamedValueFloat);
+                }
+            }
+        }
+
+        function handleNamedValueFloat(name, value) {
+            if (name === "rc_source") {
+                controllerStatus.activeControllerId = value;
+                if (value >= 2) {
+                    mainWindow.showMessageDialog(qsTr("Control Change"), qsTr("Handheld Controller is now active"));
+                } else {
+                    mainWindow.showMessageDialog(qsTr("Control Change"), qsTr("Field Control Station is now active"));
+                }
+            }
+        }
+
+        QGCColoredImage {
+            id: controllerIcon
+            source: controllerStatus.activeControllerId === 2 ? "qrc:/qmlimages/RCHandheld.svg" : "qrc:/qmlimages/RCFCS.svg"
+            height: ScreenTools.defaultFontPixelHeight * 2
+            width: height
+            fillMode: Image.PreserveAspectFit
+            color: qgcPal.colorGreen
+            anchors.centerIn: parent
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // -- Branding Logo
     Image {
-        anchors.right:          parent.right
+        anchors.right:          controllerStatus.left
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
         anchors.margins:        ScreenTools.defaultFontPixelHeight * 0.66
