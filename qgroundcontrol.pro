@@ -65,10 +65,10 @@ WindowsBuild {
 # Branding
 #
 
-QGC_APP_NAME        = "OceanSled"
+QGC_APP_NAME        = "OceanSled Pilot"
 QGC_ORG_NAME        = "Shift Coastal Technologies"
 QGC_ORG_DOMAIN      = "com.shiftenvironmental"
-QGC_APP_DESCRIPTION = "OceanSled Navigation Software"
+QGC_APP_DESCRIPTION = "OceanSled Pilot"
 QGC_APP_COPYRIGHT   = "Copyright (C) 2024 Shift Environmental Technologies. All rights reserved."
 
 WindowsBuild {
