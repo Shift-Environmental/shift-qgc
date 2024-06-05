@@ -682,6 +682,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     }
 
     switch (message.msgid) {
+    case MAVLINK_MSG_ID_NAMED_VALUE_FLOAT:
+        _handleNamedValueFloatReceived(message);
+        break;
     case MAVLINK_MSG_ID_HOME_POSITION:
         _handleHomePosition(message);
         break;
@@ -808,6 +811,16 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     emit mavlinkMessageReceived(message);
 
     _uas->receiveMessage(message);
+}
+
+void Vehicle::_handleNamedValueFloatReceived(const mavlink_message_t& message)
+{
+    mavlink_named_value_float_t namedValueFloat;
+    mavlink_msg_named_value_float_decode(&message, &namedValueFloat);
+    QString name = QString::fromUtf8(namedValueFloat.name);
+    float value = namedValueFloat.value;
+
+    emit namedValueFloatReceived(name, value);
 }
 
 #if !defined(NO_ARDUPILOT_DIALECT)

@@ -896,6 +896,7 @@ signals:
     void coordinateChanged              (QGeoCoordinate coordinate);
     void joystickEnabledChanged         (bool enabled);
     void mavlinkMessageReceived         (const mavlink_message_t& message);
+    void namedValueFloatReceived        (const QString& name, float value);
     void homePositionChanged            (const QGeoCoordinate& homePosition);
     void armedPositionChanged();
     void armedChanged                   (bool armed);
@@ -1039,6 +1040,7 @@ private:
     void _saveSettings                  ();
     void _startJoystick                 (bool start);
     void _handlePing                    (LinkInterface* link, mavlink_message_t& message);
+    void _handleNamedValueFloatReceived (const mavlink_message_t& message);
     void _handleHomePosition            (mavlink_message_t& message);
     void _handleHeartbeat               (mavlink_message_t& message);
     void _handleRadioStatus             (mavlink_message_t& message);
