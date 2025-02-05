@@ -5,8 +5,8 @@
 [
 {
     "name":                 "adsbServerConnectEnabled",
-    "shortDesc":     "Connect to ADSB SBS server",
-    "longDesc":      "Connect to ADSB SBS-1 server using specified address/port",
+    "shortDesc":     "Connect to AIS server",
+    "longDesc":      "Connect to AIS server using specified address/port",
     "type":                 "bool",
     "default":         false,
     "qgcRebootRequired":    true

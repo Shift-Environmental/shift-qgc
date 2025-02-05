@@ -272,6 +272,52 @@ Rectangle {
                         }
                     }
 
+                    Item { width: 1; height: _margins; visible: adsbSectionLabel.visible }
+                    QGCLabel {
+                        id:         adsbSectionLabel
+                        text:       qsTr("AIS Server")
+                        visible:    QGroundControl.settingsManager.adsbVehicleManagerSettings.visible
+                    }
+                    Rectangle {
+                        Layout.preferredHeight: adsbGrid.y + adsbGrid.height + _margins
+                        Layout.preferredWidth:  adsbGrid.width + (_margins * 2)
+                        color:                  qgcPal.windowShade
+                        visible:                adsbSectionLabel.visible
+                        Layout.fillWidth:       true
+                        GridLayout {
+                            id:                         adsbGrid
+                            anchors.topMargin:          _margins
+                            Layout.fillWidth:           true
+                            anchors.horizontalCenter:   parent.horizontalCenter
+                            columns:                    2
+                            property var  adsbSettings:    QGroundControl.settingsManager.adsbVehicleManagerSettings
+                            FactCheckBox {
+                                text:                   adsbGrid.adsbSettings.adsbServerConnectEnabled.shortDescription
+                                fact:                   adsbGrid.adsbSettings.adsbServerConnectEnabled
+                                visible:                adsbGrid.adsbSettings.adsbServerConnectEnabled.visible
+                                Layout.columnSpan:      2
+                            }
+                            QGCLabel {
+                                text:               adsbGrid.adsbSettings.adsbServerHostAddress.shortDescription
+                                visible:            adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                            }
+                            FactTextField {
+                                fact:                   adsbGrid.adsbSettings.adsbServerHostAddress
+                                visible:                adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                                Layout.fillWidth:       true
+                            }
+                            QGCLabel {
+                                text:               adsbGrid.adsbSettings.adsbServerPort.shortDescription
+                                visible:            adsbGrid.adsbSettings.adsbServerPort.visible
+                            }
+                            FactTextField {
+                                fact:                   adsbGrid.adsbSettings.adsbServerPort
+                                visible:                adsbGrid.adsbSettings.adsbServerPort.visible
+                                Layout.preferredWidth:  _valueFieldWidth
+                            }
+                        }
+                    }
+
                     Item { width: 1; height: _margins; visible: unitsSectionLabel.visible }
                     QGCLabel {
                         id:         unitsSectionLabel
