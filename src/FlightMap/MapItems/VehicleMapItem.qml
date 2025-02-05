@@ -51,21 +51,11 @@ MapQuickItem {
             radius:             width * 0.5
             visible:            false
         }
-        DropShadow {
-            anchors.fill:       vehicleShadow
-            visible:            vehicleIcon.visible && _adsbVehicle
-            horizontalOffset:   4
-            verticalOffset:     4
-            radius:             32.0
-            samples:            65
-            color:              Qt.rgba(0.94,0.91,0,0.5)
-            source:             vehicleShadow
-        }
         Image {
             id:                 vehicleIcon
-            source:             _adsbVehicle ? (alert ? "/qmlimages/AlertAircraft.svg" : "/qmlimages/AwarenessAircraft.svg") : vehicle.vehicleImageOpaque
+            source:             _adsbVehicle ? "/qmlimages/adsbVehicle.svg" : vehicle.vehicleImageOpaque
             mipmap:             true
-            width:              size
+            width:              _adsbVehicle ? size / 1.5 : size
             sourceSize.width:   size
             fillMode:           Image.PreserveAspectFit
             transform: Rotation {
@@ -80,15 +70,10 @@ MapQuickItem {
             anchors.top:                parent.bottom
             anchors.horizontalCenter:   parent.horizontalCenter
             map:                        _map
-            text:                       vehicleLabelText
-            font.pointSize:             _adsbVehicle ? ScreenTools.defaultFontPointSize : ScreenTools.smallFontPointSize
-            visible:                    _adsbVehicle ? !isNaN(altitude) : _multiVehicle
-            property string vehicleLabelText: visible ?
-                                                  (_adsbVehicle ?
-                                                       QGroundControl.unitsConversion.metersToAppSettingsHorizontalDistanceUnits(altitude).toFixed(0) + " " + QGroundControl.unitsConversion.appSettingsHorizontalDistanceUnitsString + "\n" + callsign :
-                                                       (_multiVehicle ? qsTr("Vehicle %1").arg(vehicle.id) : "")) :
-                                                  ""
-
+            text:                       _adsbVehicle ? vehicleLabelText : "OceanSled"
+            font.pointSize:             ScreenTools.smallFontPointSize
+            visible:                    _adsbVehicle ? !isNaN(altitude) : true
+            property string vehicleLabelText: visible ? callsign : "No Callsign"
         }
     }
 }

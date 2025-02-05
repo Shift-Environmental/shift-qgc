@@ -45,6 +45,7 @@ private:
     QString         _hostAddress;
     int             _port;
     QTcpSocket*     _socket =   nullptr;
+    void _parseAndEmitAIS(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
     void _parseAndEmitCallsign(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
     void _parseAndEmitLocation(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
     void _parseAndEmitHeading(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);

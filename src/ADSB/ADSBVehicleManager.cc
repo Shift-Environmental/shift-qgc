@@ -144,6 +144,7 @@ void ADSBTCPLink::_parseLine(const QString &line)
         uint32_t icaoAddress = values[4].toUInt(&icaoOk, 16);
 
         if (!icaoOk) {
+            qCDebug(ADSBVehicleManagerLog) << " INVALID ICAO ";
             return;
         }
 
@@ -151,6 +152,9 @@ void ADSBTCPLink::_parseLine(const QString &line)
         adsbInfo.icaoAddress = icaoAddress;
 
         switch (msgType) {
+        case 0:
+            _parseAndEmitAIS(adsbInfo, values);
+            break;
         case 1:
         case 5:
         case 6:
@@ -164,6 +168,41 @@ void ADSBTCPLink::_parseLine(const QString &line)
             break;
         }
     }
+}
+
+void ADSBTCPLink::_parseAndEmitAIS(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values)
+{
+    // Vehicle label won't display without a valid altitude number
+    adsbInfo.altitude = 0;
+
+    // Location
+    bool latOk, lonOk;
+    double lat = values[6].toDouble(&latOk);
+    double lon = values[7].toDouble(&lonOk);
+
+    if (!latOk || !lonOk) return;
+    if (lat == 0 && lon == 0) return;
+
+    QGeoCoordinate location(lat, lon);
+    adsbInfo.location = location;
+
+    // Heading
+    bool headingOk;
+    double heading = values[8].toDouble(&headingOk);
+    if (!headingOk) {
+        qCDebug(ADSBVehicleManagerLog) << " INVALID HEADING: " << heading;
+        return;
+    }
+
+    adsbInfo.heading = heading;
+
+    // Callsign
+    QString callsign = values[5].trimmed();
+    adsbInfo.callsign = callsign;
+
+    adsbInfo.availableFlags = ADSBVehicle::AltitudeAvailable | ADSBVehicle::CallsignAvailable | ADSBVehicle::HeadingAvailable | ADSBVehicle::LocationAvailable;
+
+    emit adsbVehicleUpdate(adsbInfo);
 }
 
 void ADSBTCPLink::_parseAndEmitCallsign(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values)
