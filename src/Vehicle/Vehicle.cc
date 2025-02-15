@@ -1031,7 +1031,11 @@ void Vehicle::_handleVfrHud(mavlink_message_t& message)
     mavlink_vfr_hud_t vfrHud;
     mavlink_msg_vfr_hud_decode(&message, &vfrHud);
 
-    _airSpeedFact.setRawValue(qIsNaN(vfrHud.airspeed) ? 0 : vfrHud.airspeed);
+    // Do not display air speed from autopilot. This will always come from the onboard computer.
+    if(message.compid != MAV_COMP_ID_AUTOPILOT1) {
+        _airSpeedFact.setRawValue(qIsNaN(vfrHud.airspeed) ? 0 : vfrHud.airspeed);
+    }
+
     _groundSpeedFact.setRawValue(qIsNaN(vfrHud.groundspeed) ? 0 : vfrHud.groundspeed);
     _climbRateFact.setRawValue(qIsNaN(vfrHud.climb) ? 0 : vfrHud.climb);
     _throttlePctFact.setRawValue(static_cast<int16_t>(vfrHud.throttle));
