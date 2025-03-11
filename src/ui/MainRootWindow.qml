@@ -28,6 +28,9 @@ ApplicationWindow {
     minimumHeight:  ScreenTools.isMobile ? Screen.height : Math.min(ScreenTools.defaultFontPixelWidth * 50, Screen.height)
     visible:        true
 
+    // Dictionary to track active message dialogs by title
+    property var activeMessageDialogs: ({})
+
     Component.onCompleted: {
         //-- Full screen on mobile or tiny screens
         if (ScreenTools.isMobile || Screen.height / ScreenTools.realPixelDensity < 120) {
@@ -172,6 +175,35 @@ ApplicationWindow {
 
     function showMessageDialog(dialogTitle, dialogText, buttons = StandardButton.Ok, acceptFunction = null) {
         simpleMessageDialogComponent.createObject(mainWindow, { title: dialogTitle, text: dialogText, buttons: buttons, acceptFunction: acceptFunction }).open()
+    }
+
+    //-- Global unique message dialog (only allow one per dialogTitle)
+    function showUniqueMessageDialog(dialogTitle, dialogText, buttons = StandardButton.Ok, acceptFunction = null) {
+        // Check if a dialog with the same title is already open
+        if (activeMessageDialogs[dialogTitle]) {
+            activeMessageDialogs[dialogTitle].close();
+            activeMessageDialogs[dialogTitle].destroy(); // Ensure proper cleanup
+            activeMessageDialogs[dialogTitle] = null;
+        }
+
+        // Create a new message dialog
+        var newDialog = simpleMessageDialogComponent.createObject(mainWindow, {
+            title: dialogTitle,
+            text: dialogText,
+            buttons: buttons,
+            acceptFunction: acceptFunction
+        });
+
+        newDialog.open();
+
+        // Store the reference in the dictionary
+        activeMessageDialogs[dialogTitle] = newDialog;
+
+        // Ensure cleanup when the dialog is closed
+        newDialog.closed.connect(function() {
+            activeMessageDialogs[dialogTitle].destroy();
+            activeMessageDialogs[dialogTitle] = null;
+        });
     }
 
     // This variant is only meant to be called by QGCApplication

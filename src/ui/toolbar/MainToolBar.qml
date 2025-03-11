@@ -148,9 +148,9 @@ Rectangle {
             if (name === "rc_source") {
                 controllerStatus.activeControllerId = value;
                 if (value >= 2) {
-                    mainWindow.showMessageDialog(qsTr("Control Change"), qsTr("Handheld Controller is now active"));
+                    mainWindow.showUniqueMessageDialog(qsTr("Control Change"), qsTr("Handheld Controller is now active"));
                 } else {
-                    mainWindow.showMessageDialog(qsTr("Control Change"), qsTr("Field Control Station is now active"));
+                    mainWindow.showUniqueMessageDialog(qsTr("Control Change"), qsTr("Field Control Station is now active"));
                 }
             }
         }
