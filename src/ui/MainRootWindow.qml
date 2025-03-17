@@ -179,31 +179,30 @@ ApplicationWindow {
 
     //-- Global unique message dialog (only allow one per dialogTitle)
     function showUniqueMessageDialog(dialogTitle, dialogText, buttons = StandardButton.Ok, acceptFunction = null) {
-        // Check if a dialog with the same title is already open
         if (activeMessageDialogs[dialogTitle]) {
-            activeMessageDialogs[dialogTitle].close();
-            activeMessageDialogs[dialogTitle].destroy(); // Ensure proper cleanup
-            activeMessageDialogs[dialogTitle] = null;
+            // Update existing dialog's text and reopen it
+            activeMessageDialogs[dialogTitle].text = dialogText;
+            activeMessageDialogs[dialogTitle].open();
+        } else {
+            // Create a new dialog
+            var newDialog = simpleMessageDialogComponent.createObject(mainWindow, {
+                title: dialogTitle,
+                text: dialogText,
+                buttons: buttons,
+                acceptFunction: acceptFunction
+            });
+
+            // Store the dialog in the dictionary
+            activeMessageDialogs[dialogTitle] = newDialog;
+
+            // Clean up when the dialog is closed
+            newDialog.onClosed.connect(function() {
+                delete activeMessageDialogs[dialogTitle];
+            });
+
+            // Open the dialog
+            newDialog.open();
         }
-
-        // Create a new message dialog
-        var newDialog = simpleMessageDialogComponent.createObject(mainWindow, {
-            title: dialogTitle,
-            text: dialogText,
-            buttons: buttons,
-            acceptFunction: acceptFunction
-        });
-
-        newDialog.open();
-
-        // Store the reference in the dictionary
-        activeMessageDialogs[dialogTitle] = newDialog;
-
-        // Ensure cleanup when the dialog is closed
-        newDialog.closed.connect(function() {
-            activeMessageDialogs[dialogTitle].destroy();
-            activeMessageDialogs[dialogTitle] = null;
-        });
     }
 
     // This variant is only meant to be called by QGCApplication
