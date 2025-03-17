@@ -748,6 +748,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_ADSB_VEHICLE:
         _handleADSBVehicle(message);
         break;
+    case MAVLINK_MSG_ID_AIS_VESSEL:
+        _handleAISVessel(message);
+        break;
     case MAVLINK_MSG_ID_HIGH_LATENCY:
         _handleHighLatency(message);
         break;
@@ -3830,6 +3833,51 @@ void Vehicle::_handleADSBVehicle(const mavlink_message_t& message)
             vehicleInfo.availableFlags |= ADSBVehicle::HeadingAvailable;
         }
 
+        _toolbox->adsbVehicleManager()->adsbVehicleUpdate(vehicleInfo);
+    }
+}
+
+void Vehicle::_handleAISVessel(const mavlink_message_t& message)
+{
+    mavlink_ais_vessel_t aisVesselMsg;
+    static const int maxTimeSinceLastSeen = 15; // Same timeout as ADSB vehicles
+
+    // Decode the AIS vessel message
+    mavlink_msg_ais_vessel_decode(&message, &aisVesselMsg);
+
+    // Check if coordinates are valid and the message is recent
+    if (aisVesselMsg.tslc <= maxTimeSinceLastSeen) {
+        ADSBVehicle::ADSBVehicleInfo_t vehicleInfo;
+
+        // Initialize the vehicle info structure
+        vehicleInfo.availableFlags = 0;
+
+        // Format ICAO address as 0xA00000 + MMSI, converted to uppercase hex string
+        // MMSI is a 9-digit number, so we add it to 0xA00000 to fit the 24-bit ICAO address space
+        uint32_t icaoValue = 0xA00000 + aisVesselMsg.MMSI;
+        vehicleInfo.icaoAddress = icaoValue; // Store as integer, not string, since ADSBVehicle uses uint32_t
+
+        // Set latitude and longitude (converted from 1e7 degrees to degrees)
+        vehicleInfo.location.setLatitude(aisVesselMsg.lat / 1e7);
+        vehicleInfo.location.setLongitude(aisVesselMsg.lon / 1e7);
+        vehicleInfo.availableFlags |= ADSBVehicle::LocationAvailable;
+
+        // Format callsign as "shipname (MMSI)" or "UNKNOWN (MMSI)" if shipname is empty
+        QString shipName = QString(aisVesselMsg.callsign).trimmed();
+        if (shipName.isEmpty()) {
+            shipName = "UNKNOWN";
+        }
+        vehicleInfo.callsign = QString("%1 (%2)").arg(shipName).arg(aisVesselMsg.MMSI);
+        vehicleInfo.availableFlags |= ADSBVehicle::CallsignAvailable;
+
+        vehicleInfo.altitude = 0;
+        vehicleInfo.availableFlags |= ADSBVehicle::AltitudeAvailable;
+
+        // Set heading
+        vehicleInfo.heading = (double)aisVesselMsg.heading / 100.0; // Convert from 100ths of a degree to degrees
+        vehicleInfo.availableFlags |= ADSBVehicle::HeadingAvailable;
+
+        // Update the ADSB vehicle manager with this AIS vessel data
         _toolbox->adsbVehicleManager()->adsbVehicleUpdate(vehicleInfo);
     }
 }
