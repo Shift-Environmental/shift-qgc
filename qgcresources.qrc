@@ -18,7 +18,7 @@
         <file alias="counter-clockwise-arrow.svg">resources/counter-clockwise-arrow.svg</file>
         <file alias="chevron-down.svg">resources/chevron-down.svg</file>
         <file alias="chevron-up.svg">resources/chevron-up.svg</file>
-		<file alias="DropArrow.svg">resources/DropArrow.svg</file>
+        <file alias="DropArrow.svg">resources/DropArrow.svg</file>
         <file alias="gear-black.svg">resources/gear-black.svg</file>
         <file alias="gear-white.svg">resources/gear-white.svg</file>
         <file alias="helicoptericon.svg">resources/helicoptericon.svg</file>
@@ -38,7 +38,7 @@
         <file alias="Play">resources/Play.svg</file>
         <file alias="PowerButton">resources/PowerButton.svg</file>
         <file alias="QGCLogoBlack">resources/cims_logo.png</file>
-		<file alias="QGCLogoFull">resources/cims_logo.png</file>
+        <file alias="QGCLogoFull">resources/cims_logo.png</file>
         <file alias="QGCLogoWhite">resources/cims_logo.png</file>
         <file alias="QGCLogoArrow">resources/cims_logo.png</file>
         <file alias="QGroundControlConnect">resources/QGroundControlConnect.svg</file>
@@ -62,6 +62,8 @@
         <file alias="Folder.svg">resources/Folder.svg</file>
         <file alias="OceanSled_Red.png">resources/OceanSled_Red.png</file>
         <file>resources/icons/qgroundcontrol.ico</file>
+        <file alias="os_speaker_off.svg">resources/os_speaker_off.svg</file>
+        <file alias="os_speaker_on.svg">resources/os_speaker_on.svg</file>
     </qresource>
     <qresource prefix="/res/firmware">
         <file alias="3drradio.png">resources/firmware/3drradio.png</file>

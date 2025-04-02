@@ -23,6 +23,11 @@ ToolStripActionList {
             iconSource:     "/res/wind-rose.svg"
             onTriggered:    mainWindow.showPlanView()
         },
+        ToolStripAction {
+            text:           qsTr("Loudspeaker")
+            iconSource:     "/res/os_speaker_off.svg"
+            // onTriggered:    // TODO: Turn the loudspeaker on/off and update the button state after the two-way comms API says 200 OK
+        },
         PreFlightCheckListShowAction { onTriggered: displayPreFlightChecklist() },
         // GuidedActionTakeoff { },
         // GuidedActionLand { },
