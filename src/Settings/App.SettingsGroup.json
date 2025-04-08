@@ -325,6 +325,18 @@
     "longDesc":  "Host name to forward mavlink to. i.e: localhost:14445",
     "type":             "string",
     "default":     "localhost:14445"
+},
+{
+    "name":             "audioCommsEnabled",
+    "shortDesc":        "Enable Two-Way Comms",
+    "type":             "bool",
+    "default":           false
+},
+{
+    "name":             "audioCommsApiUrl",
+    "shortDesc":        "Two-Way Comms API URL",
+    "type":             "string",
+    "default":          "http://CommsPi.local:8000"
 }
 ]
 }

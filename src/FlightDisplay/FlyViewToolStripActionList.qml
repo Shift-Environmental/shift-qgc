@@ -11,11 +11,13 @@ import QtQml.Models 2.12
 
 import QGroundControl           1.0
 import QGroundControl.Controls  1.0
+import QGroundControl.SettingsManager 1.0
 
 ToolStripActionList {
     id: _root
 
-    signal displayPreFlightChecklist
+    signal displayPreFlightChecklist    
+    property var appSettings: QGroundControl.settingsManager.appSettings
 
     model: [
         ToolStripAction {
@@ -23,11 +25,19 @@ ToolStripActionList {
             iconSource:     "/res/wind-rose.svg"
             onTriggered:    mainWindow.showPlanView()
         },
+
+        // Speaker ON/OFF Toggle - Only visible if audioCommsEnabled is true
         ToolStripAction {
-            text:           qsTr("Loudspeaker")
-            iconSource:     "/res/os_speaker_off.svg"
-            // onTriggered:    // TODO: Turn the loudspeaker on/off and update the button state after the two-way comms API says 200 OK
+            visible:        appSettings.audioCommsEnabled.value
+            text:           qsTr("Speaker")
+            iconSource:     AudioCommsService.speakerOn ? "/res/os_speaker_on.svg" : "/res/os_speaker_off.svg"
+            onTriggered:    if (AudioCommsService.speakerOn) {
+                                AudioCommsService.muteSpeaker()
+                            } else {
+                                AudioCommsService.unmuteSpeaker()
+                            }
         },
+
         PreFlightCheckListShowAction { onTriggered: displayPreFlightChecklist() },
         // GuidedActionTakeoff { },
         // GuidedActionLand { },

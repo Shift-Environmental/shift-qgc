@@ -105,6 +105,7 @@
 #include "RemoteIDManager.h"
 #include "CustomAction.h"
 #include "CustomActionManager.h"
+#include "AudioCommsService.h"
 
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
@@ -184,6 +185,11 @@ static QObject* qgroundcontrolQmlGlobalSingletonFactory(QQmlEngine*, QJSEngine*)
 static QObject* shapeFileHelperSingletonFactory(QQmlEngine*, QJSEngine*)
 {
     return new ShapeFileHelper;
+}
+
+static QObject* audioCommsServiceFactory(QQmlEngine*, QJSEngine*) {
+    static AudioCommsService* instance = new AudioCommsService();
+    return instance;
 }
 
 QGCApplication::QGCApplication(int &argc, char* argv[], bool unitTesting)
@@ -538,6 +544,7 @@ void QGCApplication::_initCommon()
     qmlRegisterSingletonType<ScreenToolsController>     ("QGroundControl.ScreenToolsController",    1, 0, "ScreenToolsController",  screenToolsControllerSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("QGroundControl.ShapeFileHelper",          1, 0, "ShapeFileHelper",        shapeFileHelperSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("MAVLink",                                 1, 0, "MAVLink",                mavlinkSingletonFactory);
+    qmlRegisterSingletonType<AudioCommsService>         ("QGroundControl",                          1, 0, "AudioCommsService",      audioCommsServiceFactory);
 
     // Although this should really be in _initForNormalAppBoot putting it here allowws us to create unit tests which pop up more easily
     if(QFontDatabase::addApplicationFont(":/fonts/opensans") < 0) {

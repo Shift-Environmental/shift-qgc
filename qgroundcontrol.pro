@@ -403,6 +403,7 @@ INCLUDEPATH += \
     src/Geo \
     src/GPS \
     src/Joystick \
+    src/OceanSled \
     src/PlanView \
     src/MissionManager \
     src/PositionManager \
@@ -503,6 +504,7 @@ DebugBuild { PX4FirmwarePlugin { PX4FirmwarePluginFactory { APMFirmwarePlugin { 
         src/MissionManager/TransectStyleComplexItemTest.h \
         src/MissionManager/TransectStyleComplexItemTestBase.h \
         src/MissionManager/VisualMissionItemTest.h \
+        src/OceanSled/AudioCommsService.h \
         src/qgcunittest/ComponentInformationCacheTest.h \
         src/qgcunittest/ComponentInformationTranslationTest.h \
         src/qgcunittest/GeoTest.h \
@@ -765,6 +767,7 @@ HEADERS += \
     src/uas/UASMessageHandler.h \
     src/AnalyzeView/GeoTagController.h \
     src/AnalyzeView/ExifParser.h \
+    src/OceanSled/AudioCommsService.h \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     HEADERS += \
@@ -1024,6 +1027,7 @@ SOURCES += \
     src/uas/UASMessageHandler.cc \
     src/AnalyzeView/GeoTagController.cc \
     src/AnalyzeView/ExifParser.cc \
+    src/OceanSled/AudioCommsService.cc \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     SOURCES += \

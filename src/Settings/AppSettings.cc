@@ -36,6 +36,7 @@ const char* AppSettings::photoDirectory =           QT_TRANSLATE_NOOP("AppSettin
 const char* AppSettings::crashDirectory =           QT_TRANSLATE_NOOP("AppSettings", "CrashLogs");
 const char* AppSettings::customActionsDirectory =   QT_TRANSLATE_NOOP("AppSettings", "CustomActions");
 
+
 // Release languages are 90%+ complete
 QList<int> AppSettings::_rgReleaseLanguages = {
     QLocale::AnyLanguage,  // System
@@ -149,6 +150,8 @@ DECLARE_SETTINGSFACT(AppSettings, saveCsvTelemetry)
 DECLARE_SETTINGSFACT(AppSettings, firstRunPromptIdsShown)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlink)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlinkHostName)
+DECLARE_SETTINGSFACT(AppSettings, audioCommsEnabled)
+DECLARE_SETTINGSFACT(AppSettings, audioCommsApiUrl)
 
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette)
 {

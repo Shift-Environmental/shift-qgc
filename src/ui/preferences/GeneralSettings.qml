@@ -36,6 +36,8 @@ Rectangle {
     property Fact _userBrandImageOutdoor:               QGroundControl.settingsManager.brandImageSettings.userBrandImageOutdoor
     property Fact _virtualJoystick:                     QGroundControl.settingsManager.appSettings.virtualJoystick
     property Fact _virtualJoystickAutoCenterThrottle:   QGroundControl.settingsManager.appSettings.virtualJoystickAutoCenterThrottle
+    property Fact _audioCommsApiUrl:                    QGroundControl.settingsManager.appSettings.audioCommsApiUrl
+    property Fact _audioCommsEnabled:                   QGroundControl.settingsManager.appSettings.audioCommsEnabled
 
     property real   _labelWidth:                ScreenTools.defaultFontPixelWidth * 20
     property real   _comboFieldWidth:           ScreenTools.defaultFontPixelWidth * 30
@@ -317,6 +319,47 @@ Rectangle {
                             }
                         }
                     }
+
+                    // Audio Comms Section
+                    Item { width: 1; height: _margins; visible: audioCommsLabel.visible }
+                    QGCLabel {
+                        id:     audioCommsLabel
+                        text:   qsTr("Two-Way Comms")
+                        visible: QGroundControl.settingsManager.appSettings.audioCommsEnabled.visible
+                    }
+                    Rectangle {
+                        Layout.preferredHeight: audioCommsGrid.y + audioCommsGrid.height + _margins
+                        Layout.preferredWidth:  audioCommsGrid.width + (_margins * 2)
+                        color:                  qgcPal.windowShade
+                        visible:                audioCommsLabel.visible
+                        Layout.fillWidth:       true
+
+                        GridLayout {
+                            id:                         audioCommsGrid
+                            anchors.topMargin:          _margins
+                            Layout.fillWidth:           true
+                            anchors.horizontalCenter:   parent.horizontalCenter
+                            columns:                    2
+
+                            FactCheckBox {
+                                text:               qsTr("Two-Way Comms Enabled")
+                                fact:               _audioCommsEnabled
+                                visible:            _audioCommsEnabled.visible
+                                Layout.columnSpan:  2
+                            }
+
+                            QGCLabel {
+                                text:       _audioCommsApiUrl.shortDescription
+                                visible:    _audioCommsEnabled.value && _audioCommsApiUrl.visible
+                            }
+                            FactTextField {
+                                fact:               _audioCommsApiUrl
+                                visible:            _audioCommsEnabled.value && _audioCommsApiUrl.visible
+                                Layout.fillWidth:   true
+                            }
+                        }
+                    }
+
 
                     Item { width: 1; height: _margins; visible: unitsSectionLabel.visible }
                     QGCLabel {
