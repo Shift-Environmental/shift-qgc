@@ -274,51 +274,76 @@ Rectangle {
                         }
                     }
 
+                    // AIS Server Section
                     Item { width: 1; height: _margins; visible: adsbSectionLabel.visible }
+
                     QGCLabel {
-                        id:         adsbSectionLabel
-                        text:       qsTr("AIS Server")
-                        visible:    QGroundControl.settingsManager.adsbVehicleManagerSettings.visible
+                        id: adsbSectionLabel
+                        text: qsTr("AIS Server")
+                        visible: QGroundControl.settingsManager.adsbVehicleManagerSettings.visible
                     }
+
                     Rectangle {
-                        Layout.preferredHeight: adsbGrid.y + adsbGrid.height + _margins
-                        Layout.preferredWidth:  adsbGrid.width + (_margins * 2)
-                        color:                  qgcPal.windowShade
-                        visible:                adsbSectionLabel.visible
-                        Layout.fillWidth:       true
-                        GridLayout {
-                            id:                         adsbGrid
-                            anchors.topMargin:          _margins
-                            Layout.fillWidth:           true
-                            anchors.horizontalCenter:   parent.horizontalCenter
-                            columns:                    2
-                            property var  adsbSettings:    QGroundControl.settingsManager.adsbVehicleManagerSettings
-                            FactCheckBox {
-                                text:                   adsbGrid.adsbSettings.adsbServerConnectEnabled.shortDescription
-                                fact:                   adsbGrid.adsbSettings.adsbServerConnectEnabled
-                                visible:                adsbGrid.adsbSettings.adsbServerConnectEnabled.visible
-                                Layout.columnSpan:      2
+                        Layout.preferredHeight: adsbSettingsCol.implicitHeight + (_margins * 2)
+                        Layout.preferredWidth: adsbSettingsCol.implicitWidth + (_margins * 2)
+                        color: qgcPal.windowShade
+                        visible: adsbSectionLabel.visible
+                        Layout.fillWidth: true
+
+                        ColumnLayout {
+                            id: adsbSettingsCol
+                            anchors.fill: parent
+                            anchors.margins: _margins * 2
+                            Layout.alignment: Qt.AlignHCenter
+                            spacing: _margins * 2
+
+                            GridLayout {
+                                id: adsbGrid
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignLeft
+                                columns: 2
+                                rowSpacing: _margins * 2
+                                columnSpacing: _margins * 2
+
+                                property var adsbSettings: QGroundControl.settingsManager.adsbVehicleManagerSettings
+
+                                FactCheckBox {
+                                    text: adsbGrid.adsbSettings.adsbServerConnectEnabled.shortDescription
+                                    fact: adsbGrid.adsbSettings.adsbServerConnectEnabled
+                                    visible: adsbGrid.adsbSettings.adsbServerConnectEnabled.visible
+                                    Layout.columnSpan: 2
+                                }
+
+                                QGCLabel {
+                                    text: adsbGrid.adsbSettings.adsbServerHostAddress.shortDescription
+                                    visible: adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                                }
+
+                                FactTextField {
+                                    fact: adsbGrid.adsbSettings.adsbServerHostAddress
+                                    visible: adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                                    Layout.fillWidth: true
+                                }
+
+                                QGCLabel {
+                                    text: adsbGrid.adsbSettings.adsbServerPort.shortDescription
+                                    visible: adsbGrid.adsbSettings.adsbServerPort.visible
+                                }
+
+                                FactTextField {
+                                    fact: adsbGrid.adsbSettings.adsbServerPort
+                                    visible: adsbGrid.adsbSettings.adsbServerPort.visible
+                                    Layout.preferredWidth: _valueFieldWidth
+                                }
                             }
-                            QGCLabel {
-                                text:               adsbGrid.adsbSettings.adsbServerHostAddress.shortDescription
-                                visible:            adsbGrid.adsbSettings.adsbServerHostAddress.visible
-                            }
-                            FactTextField {
-                                fact:                   adsbGrid.adsbSettings.adsbServerHostAddress
-                                visible:                adsbGrid.adsbSettings.adsbServerHostAddress.visible
-                                Layout.fillWidth:       true
-                            }
-                            QGCLabel {
-                                text:               adsbGrid.adsbSettings.adsbServerPort.shortDescription
-                                visible:            adsbGrid.adsbSettings.adsbServerPort.visible
-                            }
-                            FactTextField {
-                                fact:                   adsbGrid.adsbSettings.adsbServerPort
-                                visible:                adsbGrid.adsbSettings.adsbServerPort.visible
-                                Layout.preferredWidth:  _valueFieldWidth
+
+                            Item {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: _margins
                             }
                         }
                     }
+
 
                     // Audio Comms Section
                     Item { width: 1; height: _margins; visible: audioCommsLabel.visible }
@@ -328,38 +353,52 @@ Rectangle {
                         visible: QGroundControl.settingsManager.appSettings.audioCommsEnabled.visible
                     }
                     Rectangle {
-                        Layout.preferredHeight: audioCommsGrid.y + audioCommsGrid.height + _margins
-                        Layout.preferredWidth:  audioCommsGrid.width + (_margins * 2)
-                        color:                  qgcPal.windowShade
-                        visible:                audioCommsLabel.visible
-                        Layout.fillWidth:       true
+                        Layout.preferredHeight: audioCommsCol.implicitHeight + (_margins * 2)
+                        Layout.preferredWidth: audioCommsCol.implicitWidth + (_margins * 2)
+                        color: qgcPal.windowShade
+                        visible: audioCommsLabel.visible
+                        Layout.fillWidth: true
 
-                        GridLayout {
-                            id:                         audioCommsGrid
-                            anchors.topMargin:          _margins
-                            Layout.fillWidth:           true
-                            anchors.horizontalCenter:   parent.horizontalCenter
-                            columns:                    2
+                        ColumnLayout {
+                            id: audioCommsCol
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.margins: _margins * 2
+                            anchors.margins: _margins * 2
+                            anchors.fill: parent
 
-                            FactCheckBox {
-                                text:               qsTr("Two-Way Comms Enabled")
-                                fact:               _audioCommsEnabled
-                                visible:            _audioCommsEnabled.visible
-                                Layout.columnSpan:  2
+                            GridLayout {
+                                id: audioCommsGrid
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignLeft
+                                columns: 2
+                                rowSpacing: _margins * 2
+                                columnSpacing: _margins * 2
+
+                                FactCheckBox {
+                                    text: qsTr("Two-Way Comms Enabled")
+                                    fact: _audioCommsEnabled
+                                    visible: _audioCommsEnabled.visible
+                                    Layout.columnSpan: 2
+                                }
+
+                                QGCLabel {
+                                    text: _audioCommsApiUrl.shortDescription
+                                    visible: _audioCommsEnabled.value && _audioCommsApiUrl.visible
+                                }
+
+                                FactTextField {
+                                    fact: _audioCommsApiUrl
+                                    visible: _audioCommsEnabled.value && _audioCommsApiUrl.visible
+                                    Layout.fillWidth: true
+                                }
                             }
 
-                            QGCLabel {
-                                text:       _audioCommsApiUrl.shortDescription
-                                visible:    _audioCommsEnabled.value && _audioCommsApiUrl.visible
-                            }
-                            FactTextField {
-                                fact:               _audioCommsApiUrl
-                                visible:            _audioCommsEnabled.value && _audioCommsApiUrl.visible
-                                Layout.fillWidth:   true
+                            Item {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: _margins
                             }
                         }
                     }
-
 
                     Item { width: 1; height: _margins; visible: unitsSectionLabel.visible }
                     QGCLabel {
