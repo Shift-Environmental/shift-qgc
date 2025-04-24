@@ -105,11 +105,20 @@ Item {
         id:         window
         visible:    false
         onClosing: {
-            var item = contentItem.children[0]
-            item.pipState.windowAboutToClose()
-            item.pipState.state = item.pipState.windowClosingState
-            item.pipState.state = item.pipState.pipState
-            item.visible = _root.show
+            var item = contentItem.children[0];
+            if (item) {
+                if(item.pipState) {
+                    if (typeof item.pipState.windowAboutToClose === "function") {
+                        item.pipState.windowAboutToClose();
+                    }
+                    if (item.pipState.windowClosingState !== undefined) {
+                        item.pipState.state = item.pipState.windowClosingState;
+                    }
+                    item.pipState.state = item.pipState.pipState;
+                }
+
+                item.visible = true;
+            }
         }
     }
 
