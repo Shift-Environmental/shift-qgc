@@ -77,3 +77,39 @@ To install Qt:
 6. Build using the "hammer" (or "play") icons in the bottom left hand corner.
 7. Screenshot demonstrating build icons, and project details to compare & ensure is correct.
    [![Screenshot-2025-04-03-145030.png](https://i.postimg.cc/3rmktVnF/Screenshot-2025-04-03-145030.png)](https://postimg.cc/Lh44XCdJ)
+
+
+# WSL Build Instructions
+
+Install **Qt 5.15.2** on a Debian-based system (such as Debian or Ubuntu)
+
+## Using the Qt Online Installer
+
+The Qt Online Installer allows you to select and install specific versions of Qt, including 5.15.2.
+
+**Steps:**
+
+1. **Download the Installer:**
+   Visit the [Qt Online Installers page](https://download.qt.io/official_releases/online_installers/) and download the appropriate installer for your system. For 64-bit Linux systems, download `qt-unified-linux-x64-online.run`.
+
+2. **Make the Installer Executable:**
+   Open a terminal in the directory containing the downloaded file and run:
+
+   ```bash
+   chmod +x qt-unified-linux-x64-online.run
+   ```
+
+3. **Run the Installer:**
+   Execute the installer:
+
+   ```bash
+   ./qt-unified-linux-x64-online.run
+   ```
+
+   During installation, you will need to log in with a Qt account. If you don't have one, you can create it during the installation process.
+
+4. **Select Qt Version:**
+   In the installer, choose a "Custom Installation" and select **Qt 5.15.2** for your desired platform (e.g., Desktop gcc 64-bit).
+
+5. **Complete Installation:**
+   Follow the remaining prompts to complete the installation.
