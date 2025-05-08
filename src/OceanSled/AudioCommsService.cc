@@ -24,12 +24,12 @@ AudioCommsService::AudioCommsService(QObject* parent)
         }
     }
 
-    getStatus(); // Initialize speaker state
+    getStatus(); // Initialize button based on OceanSled Speaker
 }
 
 void AudioCommsService::getStatus()
 {
-    QUrl statusUrl = _apiBaseUrl.resolved(QUrl("/status"));
+    QUrl statusUrl = _apiBaseUrl.resolved(QUrl("status"));
     QNetworkRequest request(statusUrl);
 
     QNetworkReply* reply = _networkManager->get(request);
@@ -58,12 +58,12 @@ void AudioCommsService::getStatus()
 
 void AudioCommsService::muteSpeaker()
 {
-    _postToApi(QUrl("/mute"));
+    _postToApi(QUrl("mute"));
 }
 
 void AudioCommsService::unmuteSpeaker()
 {
-    _postToApi(QUrl("/unmute"));
+    _postToApi(QUrl("unmute"));
 }
 
 void AudioCommsService::_postToApi(const QUrl& path)
