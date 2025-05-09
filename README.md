@@ -79,37 +79,58 @@ To install Qt:
    [![Screenshot-2025-04-03-145030.png](https://i.postimg.cc/3rmktVnF/Screenshot-2025-04-03-145030.png)](https://postimg.cc/Lh44XCdJ)
 
 
-# WSL Build Instructions
+# ✅ WSL Build Instructions for Qt 5.15.2 (From Source)
 
-Install **Qt 5.15.2** on a Debian-based system (such as Debian or Ubuntu)
+Follow these steps to install and use Qt 5.15.2 on a Debian-based WSL environment (e.g. Ubuntu or Debian).
 
-## Using the Qt Online Installer
+---
 
-The Qt Online Installer allows you to select and install specific versions of Qt, including 5.15.2.
+## 1. 🔧 Run the Installation Script
 
-**Steps:**
+Download and run the `install-qt-5.15.2.sh` script:
 
-1. **Download the Installer:**
-   Visit the [Qt Online Installers page](https://download.qt.io/official_releases/online_installers/) and download the appropriate installer for your system. For 64-bit Linux systems, download `qt-unified-linux-x64-online.run`.
+```bash
+bash install-qt-5.15.2.sh
+```
 
-2. **Make the Installer Executable:**
-   Open a terminal in the directory containing the downloaded file and run:
+### What the script does:
 
-   ```bash
-   chmod +x qt-unified-linux-x64-online.run
-   ```
+* Installs all necessary Qt build dependencies via APT
+* Clones the Qt 5.15.2 source from the official Qt Git repo
+* Initializes submodules required for QGroundControl (e.g., `qtlocation`, `qtserialport`)
+* Configures and builds Qt from source, skipping unused modules
+* Installs Qt to `~/Qt5.15.2`
 
-3. **Run the Installer:**
-   Execute the installer:
+> 💡 This process may take 30–60 minutes depending on your system.
 
-   ```bash
-   ./qt-unified-linux-x64-online.run
-   ```
+---
 
-   During installation, you will need to log in with a Qt account. If you don't have one, you can create it during the installation process.
+## 2. 🧠 Add Qt to Your Shell Environment
 
-4. **Select Qt Version:**
-   In the installer, choose a "Custom Installation" and select **Qt 5.15.2** for your desired platform (e.g., Desktop gcc 64-bit).
+Append the following to your shell config file (`~/.bashrc`, `~/.zshrc`, etc.):
 
-5. **Complete Installation:**
-   Follow the remaining prompts to complete the installation.
+```bash
+export PATH="$HOME/Qt5.15.2/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/Qt5.15.2/lib:$LD_LIBRARY_PATH"
+```
+
+Then reload your shell:
+
+```bash
+source ~/.bashrc    # or ~/.zshrc
+```
+
+To confirm it worked:
+
+```bash
+qmake --version
+```
+
+You should see:
+
+```
+QMake version: 3.x
+Using Qt version 5.15.2...
+```
+
+---
