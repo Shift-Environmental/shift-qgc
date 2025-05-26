@@ -64,6 +64,8 @@
         <file>resources/icons/qgroundcontrol.ico</file>
         <file alias="os_speaker_off.svg">resources/os_speaker_off.svg</file>
         <file alias="os_speaker_on.svg">resources/os_speaker_on.svg</file>
+        <file alias="volume-minus.svg">resources/volume-minus.svg</file>
+        <file alias="volume-plus.svg">resources/volume-plus.svg</file>
     </qresource>
     <qresource prefix="/res/firmware">
         <file alias="3drradio.png">resources/firmware/3drradio.png</file>
