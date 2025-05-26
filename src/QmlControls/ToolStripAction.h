@@ -28,6 +28,7 @@ public:
     Q_PROPERTY(QString          text                READ text                   WRITE setText                   NOTIFY textChanged)
     Q_PROPERTY(QString          iconSource          READ iconSource             WRITE setIconSource             NOTIFY iconSourceChanged)
     Q_PROPERTY(QString          alternateIconSource READ alternateIconSource    WRITE setAlternateIconSource    NOTIFY alternateIconSourceChanged)
+    Q_PROPERTY(QColor           iconColor           READ iconColor              WRITE setIconColor              NOTIFY iconColorChanged)
     Q_PROPERTY(QQmlComponent*   dropPanelComponent  READ dropPanelComponent     WRITE setDropPanelComponent     NOTIFY dropPanelComponentChanged)
 
     bool            enabled             (void) const { return _enabled; }
@@ -38,7 +39,8 @@ public:
     QString         text                (void) const { return _text; }
     QString         iconSource          (void) const { return _iconSource; }
     QString         alternateIconSource (void) const { return _alternateIconSource; }
-    QQmlComponent* dropPanelComponent   (void) const { return _dropPanelComponent; }
+    QColor          iconColor           (void) const { return _iconColor; }
+    QQmlComponent*  dropPanelComponent  (void) const { return _dropPanelComponent; }
 
     void setEnabled             (bool enabled);
     void setVisible             (bool visible);
@@ -48,6 +50,7 @@ public:
     void setText                (const QString& text);
     void setIconSource          (const QString& iconSource);
     void setAlternateIconSource (const QString& alternateIconSource);
+    void setIconColor           (const QColor& color);
     void setDropPanelComponent  (QQmlComponent* dropPanelComponent);
 
 signals:
@@ -59,6 +62,7 @@ signals:
     void textChanged                (QString text);
     void iconSourceChanged          (QString iconSource);
     void alternateIconSourceChanged (QString alternateIconSource);
+    void iconColorChanged           (const QColor& color);
     void triggered                  (QObject* source);
     void dropPanelComponentChanged  (void);
 
@@ -71,5 +75,6 @@ protected:
     QString         _text;
     QString         _iconSource;
     QString         _alternateIconSource;
+    QColor          _iconColor;
     QQmlComponent*  _dropPanelComponent =   nullptr;
 };

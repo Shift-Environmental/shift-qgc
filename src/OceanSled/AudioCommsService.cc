@@ -48,10 +48,16 @@ void AudioCommsService::getStatus()
 
         const QJsonObject obj = doc.object();
         bool newState = obj["status"].toString() == "unmuted";
+        int newVolume = obj["volume"].toInt(-1);
 
         if (newState != _speakerOn) {
             _speakerOn = newState;
             emit speakerOnChanged();
+        }
+
+        if (newVolume != _volume && newVolume >= 0 && newVolume <= 10) {
+            _volume = newVolume;
+            emit volumeChanged(_volume);
         }
     });
 }
@@ -64,6 +70,45 @@ void AudioCommsService::muteSpeaker()
 void AudioCommsService::unmuteSpeaker()
 {
     _postToApi(QUrl("unmute"));
+}
+
+void AudioCommsService::volumeUp()
+{
+    if (_volume >= 0 && _volume < 10) {
+        setVolume(_volume + 1);
+    }
+}
+
+void AudioCommsService::volumeDown()
+{
+    if (_volume > 1) {
+        setVolume(_volume - 1);
+    }
+}
+
+void AudioCommsService::setVolume(int level)
+{
+    if (level < 1 || level > 10) return;
+
+    QUrl url = _apiBaseUrl.resolved(QUrl("setVolume"));
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject payload;
+    payload["level"] = level;
+    QByteArray body = QJsonDocument(payload).toJson();
+
+    QNetworkReply* reply = _networkManager->post(request, body);
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        reply->deleteLater();
+        if (reply->error() != QNetworkReply::NoError) {
+            qWarning() << "AudioCommsService: Failed to set volume:" << reply->errorString();
+            return;
+        }
+
+        _volume = level;
+        emit volumeChanged(_volume);
+    });
 }
 
 void AudioCommsService::_postToApi(const QUrl& path)

@@ -85,6 +85,14 @@ void ToolStripAction::setAlternateIconSource(const QString& alternateIconSource)
     }
 }
 
+void ToolStripAction::setIconColor(const QColor& color)
+{
+    if (_iconColor != color) {
+        _iconColor = color;
+        emit iconColorChanged(color);
+    }
+}
+
 void ToolStripAction::setDropPanelComponent(QQmlComponent* dropPanelComponent)
 {
     _dropPanelComponent = dropPanelComponent;

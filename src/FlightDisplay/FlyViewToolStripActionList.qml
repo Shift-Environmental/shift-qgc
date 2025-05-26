@@ -26,16 +26,30 @@ ToolStripActionList {
             onTriggered:    mainWindow.showPlanView()
         },
 
-        // Speaker ON/OFF Toggle - Only visible if audioCommsEnabled is true
         ToolStripAction {
-            visible:        appSettings.audioCommsEnabled.value
-            text:           qsTr("Speaker")
-            iconSource:     AudioCommsService.speakerOn ? "/res/os_speaker_on.svg" : "/res/os_speaker_off.svg"
-            onTriggered:    if (AudioCommsService.speakerOn) {
-                                AudioCommsService.muteSpeaker()
-                            } else {
-                                AudioCommsService.unmuteSpeaker()
-                            }
+            visible: appSettings.audioCommsEnabled.value
+            text:       qsTr("Speaker")
+            iconSource: AudioCommsService.speakerOn ? "/res/os_speaker_on.svg" : "/res/os_speaker_off.svg"
+            iconColor: AudioCommsService.speakerOn ? "lightgreen" : "white"
+            onTriggered: if (AudioCommsService.speakerOn) {
+                AudioCommsService.muteSpeaker()
+            } else {
+                AudioCommsService.unmuteSpeaker()
+            }
+        },
+
+        ToolStripAction {
+            visible: appSettings.audioCommsEnabled.value
+            iconSource: "/res/volume-plus.svg"
+            onTriggered: AudioCommsService.volumeUp()
+            enabled: AudioCommsService.volume < 10
+        },
+
+        ToolStripAction {
+            visible: appSettings.audioCommsEnabled.value
+            iconSource: "/res/volume-minus.svg"
+            onTriggered: AudioCommsService.volumeDown()
+            enabled: AudioCommsService.volume > 0
         },
 
         PreFlightCheckListShowAction { onTriggered: displayPreFlightChecklist() },
