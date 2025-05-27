@@ -26,30 +26,39 @@ ToolStripActionList {
             onTriggered:    mainWindow.showPlanView()
         },
 
+
+        // ToolStripHoverButton.qml
         ToolStripAction {
-            visible: appSettings.audioCommsEnabled.value
-            text:       qsTr("Speaker")
-            iconSource: AudioCommsService.speakerOn ? "/res/os_speaker_on.svg" : "/res/os_speaker_off.svg"
-            iconColor: AudioCommsService.speakerOn ? "lightgreen" : "white"
-            onTriggered: if (AudioCommsService.speakerOn) {
-                AudioCommsService.muteSpeaker()
-            } else {
-                AudioCommsService.unmuteSpeaker()
-            }
+            visible:        appSettings.audioCommsEnabled.value
+            iconSource:     AudioCommsService.speakerOn ? "/res/os_speaker_on.svg" : "/res/os_speaker_off.svg"
+            onTriggered:    if (AudioCommsService.speakerOn) {
+                                AudioCommsService.muteSpeaker()
+                            } else {
+                                AudioCommsService.unmuteSpeaker()
+                            }
+
+            // Volume Text
+            text:           AudioCommsService.speakerOn
+                                ? qsTr("Volume: %1").arg(AudioCommsService.volume)
+                                : qsTr("Speaker Off")
         },
 
+        // ToolStripHoverButton.qml
         ToolStripAction {
             visible: appSettings.audioCommsEnabled.value
             iconSource: "/res/volume-plus.svg"
             onTriggered: AudioCommsService.volumeUp()
             enabled: AudioCommsService.volume < 10
+            text: qsTr("Volume Up")
         },
 
+        // ToolStripHoverButton.qml
         ToolStripAction {
             visible: appSettings.audioCommsEnabled.value
             iconSource: "/res/volume-minus.svg"
             onTriggered: AudioCommsService.volumeDown()
             enabled: AudioCommsService.volume > 0
+            text: qsTr("Volume Down")
         },
 
         PreFlightCheckListShowAction { onTriggered: displayPreFlightChecklist() },
