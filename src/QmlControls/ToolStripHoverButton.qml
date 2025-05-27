@@ -81,6 +81,7 @@ Button {
 
             QGCLabel {
                 id:                         innerText
+                visible:                    control.text !== "" && control.text !== undefined
                 text:                       control.text
                 color:                      _currentContentColor
                 anchors.horizontalCenter:   parent.horizontalCenter
