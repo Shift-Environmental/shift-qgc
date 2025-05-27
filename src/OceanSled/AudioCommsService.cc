@@ -30,6 +30,7 @@ AudioCommsService::AudioCommsService(QObject* parent)
 void AudioCommsService::getStatus()
 {
     QUrl statusUrl = _apiBaseUrl.resolved(QUrl("status"));
+    qDebug() << "[AudioComms] statusUrl =" << statusUrl.toString();
     QNetworkRequest request(statusUrl);
 
     QNetworkReply* reply = _networkManager->get(request);
@@ -64,17 +65,20 @@ void AudioCommsService::getStatus()
 
 void AudioCommsService::muteSpeaker()
 {
+    qDebug() << "[AudioComms] muteSpeaker";
     _postToApi(QUrl("mute"));
 }
 
 void AudioCommsService::unmuteSpeaker()
 {
+    qDebug() << "[AudioComms] unmuteSpeaker";
     _postToApi(QUrl("unmute"));
 }
 
 void AudioCommsService::volumeUp()
 {
-    if (_volume >= 0 && _volume < 10) {
+    qDebug() << "[AudioComms] volumeUp";
+    if (_volume > 0 && _volume <= 10) {
         setVolume(_volume + 1);
     }
 }
@@ -90,7 +94,9 @@ void AudioCommsService::setVolume(int level)
 {
     if (level < 1 || level > 10) return;
 
-    QUrl url = _apiBaseUrl.resolved(QUrl("setVolume"));
+    qDebug() << "[AudioComms] setVolume: " << level;
+
+    QUrl url = _apiBaseUrl.resolved(QUrl("volume"));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
